@@ -60,7 +60,6 @@ class DeliveryStatusColor {
 }
 
 const String kImageUrl = 'imageUrl';
-// AZAD START...
 const String kKeyIsFirstTime = 'is_first_time';
 const String kKeyIsSOSFirstTime = 'is_sos_first_time';
 const String kKeyStatus = 'status';
@@ -70,7 +69,6 @@ const String kKeyEmail = 'email';
 const String kKeyFirstName = 'firstName';
 const String kKeyLastName = 'firstName';
 
-
 const String kKeyJsonObject = 'json_object';
 const String kKeyJsonArray = 'json_array';
 const String kKeyStringData = 'string_data';
@@ -79,7 +77,6 @@ const String kKeyData = 'data';
 const String kKeyCode = 'code';
 const String kKeyIsLoggedIn = 'is_logged_in';
 const String kKeyIsSignIn = 'is_sign_in';
-
 const String kPhone = 'phone_number';
 const String kKeySelectedLocation = 'selected_location';
 const String kKeySelectedLat = 'selected_lot';
@@ -110,7 +107,6 @@ const String kKeyFrench = 'fr';
 const String kKeyGerman = 'de';
 const String kKeySpanish = 'es';
 const String kKeyRussian = 'ru';
-
 const String kKeyDeviceID = 'device_id';
 const String kKeyUserID = 'user_id';
 const String kKeyShopID = 'shop_id';

@@ -1,153 +1,146 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../constants/text_font_style.dart';
 import '../gen/colors.gen.dart';
 
-class CustomTextFormField extends StatefulWidget {
-  final String? labelText;
-  final String? hintText;
-  final Widget? prefixIcon;
-  final IconData? suffixIcon;
-  final bool obscureText;
-  final TextEditingController? controller;
-  final TextInputType keyboardType;
-  final Function(String)? onChanged;
-  final String? Function(String?)? validator;
-  final bool isPrefixIcon;
-  final double borderRadius;
-  final VoidCallback? onSuffixIconTap;
-  final String? iconpath;
-  final FocusNode? focusNode;
-  TextInputAction? textInputAction;
-  final Function(String)? onFieldSubmitted;
-  List<TextInputFormatter>? inputFormatters;
-  final int? maxLine;
+class CustomTextfiled extends StatelessWidget {
+  // ignore: prefer_typing_uninitialized_variables
 
-  CustomTextFormField(
-      {super.key,
-      this.labelText,
-      this.hintText,
-      this.prefixIcon,
-      this.suffixIcon,
-      this.obscureText = false,
-      this.controller,
-      this.keyboardType = TextInputType.text,
-      this.onChanged,
-      this.validator,
-      this.borderRadius = 10.0, // Set to 10 pixels
-      required this.isPrefixIcon,
-      this.iconpath,
-      this.onSuffixIconTap,
-      this.focusNode,
-      this.onFieldSubmitted,
-      this.inputFormatters,
-      this.textInputAction = TextInputAction.next,
-      this.maxLine = 1});
-
-  @override
-  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
-}
-
-class _CustomTextFormFieldState extends State<CustomTextFormField> {
-  late FocusNode _focusNode;
-  bool _isFocused = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _focusNode = FocusNode();
-    _focusNode.addListener(() {
-      setState(() {
-        _isFocused = _focusNode.hasFocus;
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _focusNode.dispose();
-    super.dispose();
-  }
+  final hintText;
+  final controller;
+  final suffixIcon;
+  final prefixIcon;
+  final fillColor;
+  final isenabled;
+  final textColor;
+  final isObsecure;
+  final readOnly;
+  final keyboardType;
+  final maxLines;
+  final initialValue;
+  final onChanged;
+  final onTap;
+  final validator;
+  const CustomTextfiled({
+    super.key,
+    this.controller,
+    this.hintText,
+    this.suffixIcon,
+    this.fillColor,
+    this.isenabled,
+    this.textColor,
+    this.isObsecure,
+    this.readOnly,
+    this.keyboardType,
+    this.maxLines,
+    this.initialValue,
+    this.onChanged,
+    this.onTap,
+    this.validator,
+    this.prefixIcon,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(widget.borderRadius),
-      ),
-      child: TextFormField(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        focusNode: _focusNode,
-        controller: widget.controller,
-        keyboardType: widget.keyboardType,
-        obscureText: widget.obscureText,
-        onChanged: widget.onChanged,
-        validator: widget.validator,
-        inputFormatters: widget.inputFormatters,
-        textInputAction: widget.textInputAction,
-        maxLines: widget.maxLine,
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: AppColors.c2C2C36,
-          labelText: widget.labelText,
-          hintText: widget.hintText,
-          hintStyle: TextFontStyle.headline15Urbanist500,
-          prefixIcon: widget.isPrefixIcon && widget.iconpath != null
-              ? Padding(
-                  padding: EdgeInsets.only(left: 20.w, right: 12.w),
-                  child: Image.asset(
-                    widget.iconpath!,
-                    width: 24.w,
-                    color:
-                        // _isFocused
-                        //     ? AppColors.allPrimaryColor
-                        //     :
-                        AppColors.c1E232C,
-                  ),
-                )
-              : null,
-          suffixIcon: widget.suffixIcon != null
-              ? GestureDetector(
-                  onTap: widget.onSuffixIconTap,
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 16.w),
-                    child: Icon(
-                      widget.suffixIcon,
-                      color:
-                          // _isFocused
-                          // ? AppColors.allPrimaryColor
-                          // :
-                          AppColors.cDADADA,
-                    ),
-                  ),
-                )
-              : null,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.borderRadius),
-            borderSide: BorderSide.none,
+    return TextFormField(
+      controller: controller,
+      obscureText: isObsecure,
+      readOnly: readOnly ?? false,
+      keyboardType: keyboardType,
+      maxLines: maxLines ?? 1,
+      initialValue: initialValue,
+      onChanged: onChanged,
+      onTap: onTap,
+      validator: validator,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: fillColor ?? AppColors.allPrimaryColor,
+
+        //SUFFIX ICON...
+        suffixIcon: suffixIcon == true
+            ? const Icon(
+                Icons.search,
+                color: AppColors.allPrimaryColor,
+              )
+            : null,
+
+        //PREFIX ICON...
+        prefixIcon: prefixIcon == true
+            ? const Icon(
+                Icons.search,
+                color: AppColors.allPrimaryColor,
+              )
+            : null,
+
+        // CONTECT PADDING...
+        contentPadding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 24.w),
+
+        hintText: hintText,
+
+        // HINTSTYLE...
+        hintStyle: TextFontStyle.headline10Urbanist.copyWith(
+          color: AppColors.allPrimaryColor,
+        ),
+
+        // BORDER...
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10.r),
           ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.borderRadius),
-            borderSide: BorderSide(width: 0.sp, color: AppColors.c2C2C36),
+        ),
+
+        //ENABLE BORDER...
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10.r),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.borderRadius),
-            borderSide: BorderSide(
-              width: 0.sp,
-              color: AppColors.c2C2C36, // Adjust the border width if needed
-            ),
+          borderSide: BorderSide(
+            color: AppColors.allPrimaryColor,
+            width: 1.w,
           ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.borderRadius),
-            borderSide: BorderSide(width: 1.sp, color: Colors.red),
+        ),
+
+        //FOCUSED BORDER...
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.r)),
+          borderSide: BorderSide(
+            color: AppColors.allPrimaryColor,
+            width: 1.w,
           ),
-          disabledBorder: InputBorder.none,
-          contentPadding:
-              EdgeInsets.symmetric(horizontal: 16.w, vertical: 18.h),
+        ),
+
+        //DISABLED BORDER...
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10.r),
+          ),
+          borderSide: BorderSide(
+            color: AppColors.allPrimaryColor,
+            width: 1.w,
+          ),
+        ),
+
+        //ERROR BORDER...
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10.r),
+          ),
+          borderSide: BorderSide(
+            color: Colors.red,
+            width: 1.w,
+          ),
+        ),
+
+        //FOCUESED ERROR BORDER...
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(6.r),
+          ),
+          borderSide: BorderSide(
+            color: Colors.red,
+            width: 1.w,
+          ),
         ),
       ),
     );
