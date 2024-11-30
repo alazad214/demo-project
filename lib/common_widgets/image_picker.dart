@@ -16,8 +16,8 @@ class ImageSourceDialog extends StatelessWidget {
     return CupertinoActionSheet(
       title: Text(
         'Choose Your Image',
-        style:
-            TextFontStyle.headline20Inter500.copyWith(color: AppColors.c000000),
+        style: TextFontStyle.headline18w500c000000
+            .copyWith(color: AppColors.c000000),
       ),
       actions: [
         CupertinoActionSheetAction(

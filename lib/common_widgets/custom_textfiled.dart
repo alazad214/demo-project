@@ -79,7 +79,7 @@ class CustomTextfiled extends StatelessWidget {
         hintText: hintText,
 
         // HINTSTYLE...
-        hintStyle: TextFontStyle.headline10Urbanist.copyWith(
+        hintStyle: TextFontStyle.textStyle10w400c000000.copyWith(
           color: AppColors.allPrimaryColor,
         ),
 
